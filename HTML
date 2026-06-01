@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPO法人やまぼうしネットワーク | 認知症になっても暮らしやすい社会へ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8853A;
+    --orange-light: #F5A96B;
+    --orange-pale: #FDF0E6;
+    --orange-deep: #C4631A;
+    --green: #4A7C59;
+    --green-light: #EBF3EE;
+    --warm-white: #FDFAF6;
+    --off-white: #F7F3ED;
+    --text-dark: #2A2118;
+    --text-mid: #5C4A38;
+    --text-light: #9C8070;
+    --border: rgba(90,60,30,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--warm-white);
+    color: var(--text-dark);
+    font-size: 16px;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(253,250,246,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .nav-logo-mark {
+    width: 36px; height: 36px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 14px; font-weight: 700;
+    color: white; letter-spacing: -0.5px;
+  }
+  .nav-logo-text { font-size: 13px; font-weight: 500; color: var(--text-dark); line-height: 1.4; }
+  .nav-logo-text span { display: block; font-size: 10px; color: var(--text-light); font-weight: 400; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; font-size: 13px; color: var(--text-mid); transition: color 0.2s; font-weight: 500; }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: white;
+    border: none; padding: 10px 20px; border-radius: 24px;
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--orange-deep); }
+  .nav-mobile-toggle { display: none; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #FDF0E6 0%, #F7F3ED 60%, #EBF3EE 100%);
+    z-index: 0;
+  }
+  .hero-pattern {
+    position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+    background-image: radial-gradient(circle, #C4631A 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .hero-circle-deco { display: none; }
+  .hero-content { position: relative; z-index: 1; max-width: 600px; padding: 120px 0 80px 8%; }
+  .hero-photo-col {
+    position: relative; z-index: 1;
+    height: 100vh; min-height: 600px;
+    overflow: hidden;
+  }
+  .hero-photo-col img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center top;
+  }
+  .hero-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(253,240,230,0.35) 0%, transparent 40%);
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: white; border: 1px solid var(--border);
+    border-radius: 24px; padding: 6px 16px;
+    font-size: 12px; color: var(--text-mid); margin-bottom: 28px;
+  }
+  .hero-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+  .hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700; line-height: 1.4;
+    color: var(--text-dark); margin-bottom: 24px;
+    letter-spacing: -0.5px;
+  }
+  .hero-title em { color: var(--orange); font-style: normal; }
+  .hero-sub {
+    font-size: 17px; color: var(--text-mid);
+    margin-bottom: 40px; line-height: 1.9; max-width: 500px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--orange); color: white;
+    padding: 16px 36px; border-radius: 32px;
+    text-decoration: none; font-weight: 700; font-size: 15px;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--orange-deep); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,90,30,0.3); }
+  .btn-outline {
+    border: 1.5px solid var(--text-mid); color: var(--text-mid);
+    padding: 16px 36px; border-radius: 32px;
+    text-decoration: none; font-weight: 500; font-size: 15px;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 56px;
+    padding-top: 40px; border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .stat-item { }
+  .stat-num { font-family: 'Noto Serif JP', serif; font-size: 36px; font-weight: 700; color: var(--orange); line-height: 1; }
+  .stat-unit { font-size: 13px; color: var(--text-light); }
+  .stat-label { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+  /* SECTION BASE */
+  section { padding: 96px 5%; }
+  .section-label {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--orange); font-weight: 700; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(24px, 3.5vw, 38px);
+    font-weight: 700; color: var(--text-dark);
+    line-height: 1.4; margin-bottom: 16px;
+  }
+  .section-desc { font-size: 16px; color: var(--text-mid); max-width: 540px; line-height: 1.9; }
+  .section-header { margin-bottom: 56px; }
+
+  /* ABOUT */
+  #about { background: white; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-visual {
+    position: relative; aspect-ratio: 4/3;
+    background: var(--orange-pale);
+    border-radius: 20px; overflow: hidden;
+  }
+  .photo-slider {
+    width: 100%; height: 100%; position: relative;
+  }
+  .photo-slide {
+    position: absolute; inset: 0;
+    opacity: 0; transition: opacity 0.8s ease;
+  }
+  .photo-slide.active { opacity: 1; }
+  .photo-slide img {
+    width: 100%; height: 100%; object-fit: cover;
+    border-radius: 20px;
+  }
+  .photo-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(30,15,5,0.65));
+    color: white; font-size: 12px; padding: 32px 16px 12px;
+    border-radius: 0 0 20px 20px; line-height: 1.5;
+  }
+  .photo-dots {
+    position: absolute; bottom: 12px; right: 14px;
+    display: flex; gap: 6px; z-index: 2;
+  }
+  .photo-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(255,255,255,0.5); cursor: pointer;
+    transition: background 0.3s;
+  }
+  .photo-dot.active { background: white; }
+  .about-quote {
+    position: absolute; bottom: -20px; right: -20px;
+    background: white; border-radius: 16px;
+    padding: 20px 24px; max-width: 240px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    border: 1px solid var(--border);
+  }
+  .about-quote p { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
+  .about-quote-author { font-size: 12px; color: var(--text-light); margin-top: 8px; font-weight: 500; }
+  .about-text p { font-size: 16px; color: var(--text-mid); line-height: 1.9; margin-bottom: 20px; }
+  .about-award {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--orange-pale); border: 1px solid rgba(230,130,60,0.3);
+    border-radius: 12px; padding: 14px 20px; margin-top: 16px;
+  }
+  .award-icon { font-size: 24px; }
+  .award-text { font-size: 13px; color: var(--orange-deep); font-weight: 500; line-height: 1.5; }
+
+  /* ACTIVITIES */
+  #activities { background: var(--off-white); }
+  .activities-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .activity-card {
+    background: white; border-radius: 20px;
+    padding: 36px 28px;
+    border: 1px solid var(--border);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .activity-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+  .activity-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: var(--orange);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .activity-card:hover::before { transform: scaleX(1); }
+  .activity-icon {
+    width: 56px; height: 56px; border-radius: 16px;
+    background: var(--orange-pale);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px; font-size: 26px;
+  }
+  .activity-card h3 { font-family: 'Noto Serif JP', serif; font-size: 19px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
+  .activity-card p { font-size: 14px; color: var(--text-mid); line-height: 1.8; }
+  .activity-tag {
+    display: inline-block; margin-top: 16px;
+    background: var(--orange-pale); color: var(--orange-deep);
+    font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px;
+  }
+
+  /* NEWS */
+  #news { background: white; }
+  .news-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .news-list { }
+  .news-item {
+    display: grid; grid-template-columns: 80px 1fr; gap: 20px;
+    padding: 24px 0; border-bottom: 1px solid var(--border);
+    text-decoration: none; color: inherit; transition: opacity 0.2s;
+  }
+  .news-item:hover { opacity: 0.7; }
+  .news-item:first-child { padding-top: 0; }
+  .news-date { font-size: 12px; color: var(--text-light); padding-top: 4px; font-family: 'Noto Serif JP', serif; }
+  .news-cat { font-size: 11px; color: var(--orange); font-weight: 700; margin-bottom: 4px; letter-spacing: 0.05em; }
+  .news-item-title { font-size: 14px; color: var(--text-dark); font-weight: 500; line-height: 1.7; }
+  .news-highlight {
+    background: var(--orange-pale); border-radius: 20px; padding: 32px;
+    border: 1px solid rgba(230,130,60,0.2);
+  }
+  .news-highlight-label { font-size: 11px; letter-spacing: 0.15em; color: var(--orange); font-weight: 700; margin-bottom: 16px; }
+  .news-highlight h3 { font-family: 'Noto Serif JP', serif; font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--text-dark); line-height: 1.5; }
+  .news-highlight p { font-size: 14px; color: var(--text-mid); line-height: 1.8; margin-bottom: 20px; }
+  .news-highlight a { font-size: 13px; color: var(--orange); font-weight: 700; text-decoration: none; }
+  .news-highlight a:hover { text-decoration: underline; }
+
+  /* SUPPORT */
+  #support { background: var(--off-white); }
+  .support-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .support-card {
+    background: white; border-radius: 20px; padding: 40px 28px;
+    text-align: center; border: 1px solid var(--border);
+    transition: transform 0.2s;
+  }
+  .support-card:hover { transform: translateY(-4px); }
+  .support-card.featured {
+    background: var(--orange); border-color: var(--orange);
+  }
+  .support-card.featured * { color: white !important; }
+  .support-card.featured .support-btn { background: white; color: var(--orange) !important; }
+  .support-card.featured .support-btn:hover { background: rgba(255,255,255,0.9); }
+  .support-icon { font-size: 40px; margin-bottom: 16px; display: block; }
+  .support-card h3 { font-family: 'Noto Serif JP', serif; font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
+  .support-card p { font-size: 14px; color: var(--text-mid); line-height: 1.8; margin-bottom: 24px; }
+  .support-btn {
+    display: inline-block; background: var(--orange); color: white;
+    padding: 12px 28px; border-radius: 24px; text-decoration: none;
+    font-size: 13px; font-weight: 700; transition: background 0.2s;
+  }
+  .support-btn:hover { background: var(--orange-deep); }
+
+  /* CONTACT */
+  #contact { background: white; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+  .contact-info h2 { font-family: 'Noto Serif JP', serif; font-size: 28px; font-weight: 700; margin-bottom: 16px; color: var(--text-dark); }
+  .contact-info p { font-size: 15px; color: var(--text-mid); line-height: 1.9; margin-bottom: 36px; }
+  .contact-detail { display: flex; flex-direction: column; gap: 16px; }
+  .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+  .contact-item-icon {
+    width: 40px; height: 40px; min-width: 40px;
+    background: var(--orange-pale); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  .contact-item-text { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+  .contact-item-text strong { display: block; font-size: 12px; color: var(--text-light); font-weight: 500; margin-bottom: 2px; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-group label { font-size: 13px; color: var(--text-mid); font-weight: 500; display: block; margin-bottom: 6px; }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%; padding: 14px 16px;
+    border: 1px solid var(--border); border-radius: 10px;
+    background: var(--warm-white); color: var(--text-dark);
+    font-family: 'Noto Sans JP', sans-serif; font-size: 15px;
+    outline: none; transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--orange); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit {
+    background: var(--orange); color: white;
+    border: none; padding: 16px; border-radius: 12px;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+    transition: background 0.2s; width: 100%;
+  }
+  .form-submit:hover { background: var(--orange-deep); }
+
+  /* FOOTER */
+  footer {
+    background: var(--text-dark); color: rgba(255,255,255,0.7);
+    padding: 64px 5% 36px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 48px; }
+  .footer-brand { }
+  .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .footer-logo-mark {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--orange); display: flex; align-items: center; justify-content: center;
+    font-family: 'Noto Serif JP', serif; font-size: 13px; font-weight: 700; color: white;
+  }
+  .footer-logo-text { font-size: 13px; font-weight: 500; color: white; }
+  .footer-brand p { font-size: 13px; line-height: 1.8; max-width: 280px; }
+  .footer-section h4 { font-size: 13px; font-weight: 700; color: white; margin-bottom: 16px; letter-spacing: 0.05em; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--orange-light); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 24px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-bottom p { font-size: 12px; }
+  .footer-sns { display: flex; gap: 12px; }
+  .sns-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; color: rgba(255,255,255,0.7);
+    font-size: 14px; transition: background 0.2s;
+  }
+  .sns-btn:hover { background: var(--orange); color: white; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease forwards; opacity: 0; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; }
+    .hero-photo-col { height: 52vw; min-height: 260px; }
+    .hero-content { padding: 100px 6% 40px; }
+    .about-grid, .news-layout, .contact-grid, .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .activities-grid, .support-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-mobile-toggle { display: block; font-size: 24px; background: none; border: none; cursor: pointer; color: var(--text-dark); }
+    .about-quote { position: static; margin-top: 20px; max-width: 100%; }
+  }
+  @media (max-width: 600px) {
+    .activities-grid, .support-grid { grid-template-columns: 1fr; }
+    section { padding: 64px 5%; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">や</div>
+    <div class="nav-logo-text">
+      NPO法人やまぼうしネットワーク
+      <span>認知症になっても暮らしやすい社会へ</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">私たちについて</a></li>
+    <li><a href="#activities">活動内容</a></li>
+    <li><a href="#news">お知らせ</a></li>
+    <li><a href="#support">支援する</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+  <a href="#support" class="nav-cta">ご支援・寄付</a>
+  <button class="nav-mobile-toggle">☰</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-circle-deco"></div>
+  <div class="hero-content">
+    <div class="hero-badge fade-up">
+      <span class="hero-badge-dot"></span>
+      岩手県滝沢市を拠点に活動中
+    </div>
+    <h1 class="hero-title fade-up delay-1">
+      <em>認知症になっても</em><br>
+      自分らしく、<br>
+      暮らせるまちへ。
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      スローショッピングをはじめ、認知症のある方とその家族が安心して地域で暮らし続けられる社会をつくるための活動をしています。
+    </p>
+    <div class="hero-actions fade-up delay-3">
+      <a href="#activities" class="btn-primary">活動を見る</a>
+      <a href="#support" class="btn-outline">支援・寄付する</a>
+    </div>
+    <div class="hero-stats fade-up delay-4">
+      <div class="stat-item">
+        <div class="stat-num">200<span class="stat-unit" style="font-size:18px;">回+</span></div>
+        <div class="stat-label">スローショッピング開催実績</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4,000<span class="stat-unit" style="font-size:18px;">人+</span></div>
+        <div class="stat-label">延べ参加者数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2019</div>
+        <div class="stat-label">活動開始年</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-photo-col">
+    <img src="https://theotol.soudan-e65.com/assets/slow_shopping_vol1_279d45c99b.jpg" alt="スローショッピングの様子 マイヤ滝沢店" onerror="this.src='https://theotol.soudan-e65.com/assets/slow_shopping_vol1_47f3a4adaa.jpg'">
+    <div class="hero-photo-overlay"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="photo-slider" id="photoSlider">
+        <div class="photo-slide active">
+          <img src="https://theotol.soudan-e65.com/assets/slow_shopping_vol1_01_a97b758b73.jpg"
+               alt="パートナーと一緒に売り場を歩く様子"
+               onerror="this.style.display='none'">
+          <div class="photo-caption">パートナーが寄り添い、本人のペースで売り場を巡る（マイヤ滝沢店）</div>
+        </div>
+        <div class="photo-slide">
+          <img src="https://theotol.soudan-e65.com/assets/slow_shopping_vol2_6f7258df6f_318b6de5e9_49f5a92c15.webp"
+               alt="スローショッピングの様子 vol2"
+               onerror="this.style.display='none'">
+          <div class="photo-caption">毎週木曜日、マイヤ滝沢店で開催中のスローショッピング</div>
+        </div>
+        <div class="photo-slide">
+          <img src="https://theotol.soudan-e65.com/assets/slow_shopping_vol1_47f3a4adaa.jpg"
+               alt="スローショッピングの様子"
+               onerror="this.style.display='none'">
+          <div class="photo-caption">「手助けしすぎない」支援で、本人が自分で選び、自分で払う</div>
+        </div>
+        <div class="photo-slide">
+          <img src="https://theotol.soudan-e65.com/assets/slow_shopping_vol2_01_e77552798e.jpg"
+               alt="紺野先生と辻野さんの対談"
+               onerror="this.style.display='none'">
+          <div class="photo-caption">発案者・紺野敏昭先生（右）とマイヤ統括者の辻野晃寛さん（左）</div>
+        </div>
+        <div class="photo-dots" id="photoDots"></div>
+      </div>
+      <div class="about-quote">
+        <p>「買い物のとき、唯一自分でお金の出し入れができる。この体験が自信になった」</p>
+        <div class="about-quote-author">— スローショッピング参加者の声</div>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-label">私たちについて</div>
+      <h2 class="section-title">「助けすぎない」<br>支援で、自分らしさを守る</h2>
+      <p>NPO法人やまぼうしネットワークは、岩手県滝沢市を拠点に、認知症のある方とその家族が安心して地域で暮らし続けられる社会をめざして活動しています。</p>
+      <p>代表理事・紺野敏昭先生（こんの神経内科・脳神経外科クリニック）が主導し、2019年から始まった「スローショッピング」は、認知症になっても「自分で選びたい、自分で払いたい」という思いを大切にする取り組みです。</p>
+      <p>私たちは「助けすぎない」支援を基本姿勢に、当事者の主体性を尊重しながら、誰もが住みよい地域づくりを実践しています。</p>
+      <div class="about-award">
+        <span class="award-icon">🏆</span>
+        <div class="award-text">2024年度 全国キャラバン・メイト連絡協議会<br>認知症サポーター活動事例部門 <strong>最優秀賞</strong> 受賞</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section id="activities">
+  <div class="section-header">
+    <div class="section-label">活動内容</div>
+    <h2 class="section-title">認知症になっても、<br>地域とつながり続けるために</h2>
+    <p class="section-desc">スローショッピングを中心に、認知症のある方と家族、地域が一体となるさまざまな取り組みを行っています。</p>
+  </div>
+  <div class="activities-grid">
+    <div class="activity-card">
+      <div class="activity-icon">🛒</div>
+      <h3>スローショッピング</h3>
+      <p>「パートナー」と呼ばれる認知症サポーターが付き添い、認知症のある方がゆっくりと安心して買い物を楽しめる場を提供。マイヤ滝沢店（毎週木曜）・マイヤ青山店（毎週水曜）で開催しています。</p>
+      <span class="activity-tag">毎週開催</span>
+    </div>
+    <div class="activity-card">
+      <div class="activity-icon">☕</div>
+      <h3>くつろぎサロン</h3>
+      <p>買い物後、スーパーのイートインスペースを「くつろぎサロン」として開放。認知症のある方・家族・パートナーが自由に交流し、介護の相談もできる憩いの場です。</p>
+      <span class="activity-tag">毎週開催</span>
+    </div>
+    <div class="activity-card">
+      <div class="activity-icon">🎽</div>
+      <h3>パートナー（ボランティア）育成</h3>
+      <p>市の認知症サポーター養成講座を受講した地域ボランティアを「パートナー」として育成。オレンジのスカーフを身に着けた仲間が活動を支えています。</p>
+      <span class="activity-tag">随時募集中</span>
+    </div>
+    <div class="activity-card">
+      <div class="activity-icon">👗</div>
+      <h3>ファッションショッピング</h3>
+      <p>「配偶者の衣類を選べない」という介護者の声から生まれた取り組み。ファッションセンターしまむらで、お買い物パートナーと一緒に衣料品を選びます。</p>
+      <span class="activity-tag">不定期開催</span>
+    </div>
+    <div class="activity-card">
+      <div class="activity-icon">🤝</div>
+      <h3>地域連携・普及啓発</h3>
+      <p>滝沢市・西北医師会・市社会福祉協議会・スーパーマイヤとの連携のもと、認知症バリアフリーな地域づくりを推進。オレンジフェスタなどのイベントにも参加しています。</p>
+      <span class="activity-tag">通年活動</span>
+    </div>
+    <div class="activity-card">
+      <div class="activity-icon">🚽</div>
+      <h3>認知症バリアフリー環境整備</h3>
+      <p>LIXILや日本工業大学と連携し、認知症の方が使いやすいバリアフリートイレの設計・試験導入など、買い物環境全体のユニバーサルデザイン化に取り組んでいます。</p>
+      <span class="activity-tag">研究・開発</span>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="news-layout">
+    <div>
+      <div class="section-label">お知らせ・ニュース</div>
+      <h2 class="section-title">最新情報</h2>
+      <div class="news-list">
+        <a href="#" class="news-item">
+          <div class="news-date">2025.04.02</div>
+          <div>
+            <div class="news-cat">受賞・表彰</div>
+            <div class="news-item-title">全国キャラバン・メイト連絡協議会 2024年度 認知症サポーター活動事例部門で最優秀賞を受賞しました</div>
+          </div>
+        </a>
+        <a href="#" class="news-item">
+          <div class="news-date">2024.08.01</div>
+          <div>
+            <div class="news-cat">メディア掲載</div>
+            <div class="news-item-title">広報たきざわ（令和6年8月1日号）にNPO法人やまぼうしネットワークの活動が掲載されました</div>
+          </div>
+        </a>
+        <a href="#" class="news-item">
+          <div class="news-date">2024.04.01</div>
+          <div>
+            <div class="news-cat">活動報告</div>
+            <div class="news-item-title">スローショッピングの開催回数が200回を突破しました。延べ参加者数も4,000人を超えました</div>
+          </div>
+        </a>
+        <a href="#" class="news-item">
+          <div class="news-date">2023.10.15</div>
+          <div>
+            <div class="news-cat">イベント</div>
+            <div class="news-item-title">認知症普及啓発イベント「オレンジフェスタ」に参加しました</div>
+          </div>
+        </a>
+        <a href="#" class="news-item">
+          <div class="news-date">2023.06.01</div>
+          <div>
+            <div class="news-cat">活動報告</div>
+            <div class="news-item-title">マイヤ青山店でも毎週水曜日のスローショッピングを開始しました</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="news-highlight">
+        <div class="news-highlight-label">🏆 2024年度 最優秀賞</div>
+        <h3>「助けすぎない」支援が全国最高評価に</h3>
+        <p>厚生労働省委託の全国キャラバン・メイト連絡協議会が選考する2024年度表彰において、やまぼうしネットワークのスローショッピング事業が認知症サポーター活動事例部門で最優秀賞に選ばれました。全国13件の応募の中から最高賞を受賞し、その活動が全国から高く評価されています。</p>
+        <a href="#">詳しく読む →</a>
+      </div>
+      <div style="margin-top:24px; background:var(--green-light); border-radius:20px; padding:28px; border:1px solid rgba(74,124,89,0.2);">
+        <div style="font-size:11px; letter-spacing:0.15em; color:var(--green); font-weight:700; margin-bottom:12px;">📅 次回スローショッピング</div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div style="display:flex; gap:16px; align-items:center;">
+            <div style="background:var(--green); color:white; border-radius:8px; padding:8px 12px; font-size:12px; font-weight:700; text-align:center; min-width:56px;">水曜<br>毎週</div>
+            <div style="font-size:14px; color:var(--text-mid); line-height:1.6;"><strong style="color:var(--text-dark);">マイヤ青山店</strong><br>13:00 〜 15:00</div>
+          </div>
+          <div style="display:flex; gap:16px; align-items:center;">
+            <div style="background:var(--orange); color:white; border-radius:8px; padding:8px 12px; font-size:12px; font-weight:700; text-align:center; min-width:56px;">木曜<br>毎週</div>
+            <div style="font-size:14px; color:var(--text-mid); line-height:1.6;"><strong style="color:var(--text-dark);">マイヤ滝沢店</strong><br>13:00 〜 15:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section id="support">
+  <div class="section-header" style="text-align:center; max-width:600px; margin:0 auto 56px;">
+    <div class="section-label">ご支援・寄付</div>
+    <h2 class="section-title">あなたの力が<br>地域を変えます</h2>
+    <p class="section-desc" style="max-width:100%;">やまぼうしネットワークの活動は、皆さまのご支援で成り立っています。ご寄付・ボランティア・広報など、さまざまな形でご参加いただけます。</p>
+  </div>
+  <div class="support-grid">
+    <div class="support-card">
+      <span class="support-icon">💝</span>
+      <h3>寄付で支援する</h3>
+      <p>ご寄付は活動の継続・拡大に直接役立てられます。一回のご寄付から、継続的な月次支援まで幅広くご支援いただけます。</p>
+      <a href="#contact" class="support-btn">寄付する</a>
+    </div>
+    <div class="support-card featured">
+      <span class="support-icon">🎽</span>
+      <h3>パートナーになる</h3>
+      <p>認知症サポーター養成講座を受講して「パートナー」として活動に参加しませんか。オレンジのスカーフで当事者に寄り添います。</p>
+      <a href="#contact" class="support-btn">申し込む</a>
+    </div>
+    <div class="support-card">
+      <span class="support-icon">📣</span>
+      <h3>活動を広める</h3>
+      <p>スローショッピングや認知症バリアフリーの考え方を、ご家族・友人・職場に広めることも大切な支援です。SNSでのシェアも歓迎します。</p>
+      <a href="#contact" class="support-btn">問い合わせる</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="section-label">お問い合わせ</div>
+      <h2>お気軽に<br>ご連絡ください</h2>
+      <p>スローショッピングへの参加、ボランティア・寄付のご相談、取材・講演のご依頼など、お気軽にお問い合わせください。</p>
+      <div class="contact-detail">
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-text">
+            <strong>事務局所在地</strong>
+            〒020-0632 岩手県滝沢市牧野林1010-4<br>こんの神経内科・脳神経外科クリニック 内
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div class="contact-item-text">
+            <strong>電話番号</strong>
+            019-699-1111
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📠</div>
+          <div class="contact-item-text">
+            <strong>FAX</strong>
+            019-699-1112
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🌐</div>
+          <div class="contact-item-text">
+            <strong>ウェブサイト</strong>
+            slowshopping.net
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label>お名前 *</label>
+          <input type="text" placeholder="山田 太郎" required>
+        </div>
+        <div class="form-group">
+          <label>メールアドレス *</label>
+          <input type="email" placeholder="example@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>お問い合わせ種別</label>
+          <select>
+            <option>スローショッピングへの参加</option>
+            <option>パートナー（ボランティア）申込</option>
+            <option>寄付・ご支援について</option>
+            <option>取材・講演のご依頼</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>メッセージ *</label>
+          <textarea placeholder="お問い合わせ内容をご記入ください" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">送信する</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="footer-logo-mark">や</div>
+        <div class="footer-logo-text">NPO法人やまぼうしネットワーク</div>
+      </div>
+      <p>認知症になっても暮らしやすい社会づくりを推進します。スローショッピングをはじめとした活動で、誰もが自分らしく生きられる地域をめざします。</p>
+    </div>
+    <div class="footer-section">
+      <h4>リンク</h4>
+      <ul class="footer-links">
+        <li><a href="#about">私たちについて</a></li>
+        <li><a href="#activities">活動内容</a></li>
+        <li><a href="#news">お知らせ</a></li>
+        <li><a href="#support">支援する</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>活動情報</h4>
+      <ul class="footer-links">
+        <li><a href="#">スローショッピングとは</a></li>
+        <li><a href="#">パートナー募集</a></li>
+        <li><a href="#">受賞・実績</a></li>
+        <li><a href="#">事業報告書</a></li>
+        <li><a href="#">プライバシーポリシー</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 特定非営利活動法人やまぼうしネットワーク. All rights reserved.</p>
+    <div class="footer-sns">
+      <a href="#" class="sns-btn" title="Facebook">f</a>
+      <a href="#" class="sns-btn" title="Twitter/X">X</a>
+      <a href="#" class="sns-btn" title="Instagram">ig</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  alert('お問い合わせありがとうございます。内容を確認の上、担当者よりご連絡いたします。');
+  e.target.reset();
+}
+
+// Photo slider
+const slides = document.querySelectorAll('.photo-slide');
+const dotsContainer = document.getElementById('photoDots');
+let current = 0;
+
+slides.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'photo-dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => goTo(i);
+  dotsContainer.appendChild(dot);
+});
+
+function goTo(n) {
+  slides[current].classList.remove('active');
+  dotsContainer.children[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  dotsContainer.children[current].classList.add('active');
+}
+
+setInterval(() => goTo((current + 1) % slides.length), 4000);
+
+// Intersection Observer for scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.activity-card, .support-card, .news-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
