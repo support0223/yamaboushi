@@ -1,0 +1,210 @@
+<!-- ===================================== -->
+
+<!-- ナビゲーション追加 -->
+
+<!-- nav-links の中に追加 -->
+
+<!-- ===================================== -->
+
+<li>
+  <a href="#inspection">視察申込</a>
+</li>
+
+<!-- ===================================== -->
+
+<!-- 視察・研修受入セクション -->
+
+<!-- CONTACTセクションの前に追加 -->
+
+<!-- ===================================== -->
+
+<section id="inspection">
+
+  <!-- セクション見出し -->
+
+  <div class="section-header">
+
+```
+<div class="section-label">
+  INSPECTION
+</div>
+
+<h2 class="section-title">
+  視察・研修受入のご案内
+</h2>
+
+<p class="section-desc">
+  スローショッピング事業や認知症バリアフリーの取り組みについて、
+  自治体・医療機関・福祉関係者・NPO等を対象とした
+  視察および研修受入を行っています。
+</p>
+```
+
+  </div>
+
+  <!-- 視察案内 -->
+
+  <div
+    style="
+      background:var(--orange-pale);
+      border-radius:20px;
+      padding:32px;
+      margin-bottom:40px;
+      border:1px solid rgba(230,130,60,0.2);
+    "
+  >
+
+```
+<h3 style="margin-bottom:16px;">
+  視察受入について
+</h3>
+
+<ul
+  style="
+    margin-left:20px;
+    line-height:2;
+    color:var(--text-mid);
+  "
+>
+  <li>対象：自治体・医療機関・福祉関係者・NPO等</li>
+  <li>所要時間：60〜120分程度</li>
+  <li>スローショッピング見学対応可</li>
+  <li>講演・意見交換対応可</li>
+  <li>日程調整のうえ実施します</li>
+</ul>
+
+<hr
+  style="
+    margin:24px 0;
+    border:none;
+    border-top:1px solid rgba(0,0,0,0.1);
+  "
+>
+
+<h4 style="margin-bottom:12px;">
+  視察受入協力金
+</h4>
+
+<ul
+  style="
+    margin-left:20px;
+    line-height:2;
+    color:var(--text-mid);
+  "
+>
+  <li>1〜5名：10,000円</li>
+  <li>6〜20名：20,000円</li>
+  <li>21名以上：応相談</li>
+</ul>
+```
+
+  </div>
+
+  <!-- Formspreeフォーム -->
+
+  <form
+    action="https://formspree.io/f/xxxxxxxx"
+    method="POST"
+    class="contact-form"
+  >
+
+```
+<!-- 団体名 -->
+<div class="form-group">
+  <label>団体名 *</label>
+  <input
+    type="text"
+    name="organization"
+    required
+  >
+</div>
+
+<!-- 担当者 -->
+<div class="form-group">
+  <label>担当者名 *</label>
+  <input
+    type="text"
+    name="name"
+    required
+  >
+</div>
+
+<!-- メールアドレス -->
+<div class="form-group">
+  <label>メールアドレス *</label>
+  <input
+    type="email"
+    name="email"
+    required
+  >
+</div>
+
+<!-- 電話番号 -->
+<div class="form-group">
+  <label>電話番号</label>
+  <input
+    type="tel"
+    name="tel"
+  >
+</div>
+
+<!-- 人数 -->
+<div class="form-group">
+  <label>参加予定人数 *</label>
+  <input
+    type="number"
+    name="participants"
+    min="1"
+    required
+  >
+</div>
+
+<!-- 希望日 -->
+<div class="form-group">
+  <label>希望日</label>
+  <input
+    type="date"
+    name="preferred_date"
+  >
+</div>
+
+<!-- 希望内容 -->
+<div class="form-group">
+  <label>希望内容</label>
+
+  <select name="request_type">
+
+    <option>視察のみ</option>
+
+    <option>講演のみ</option>
+
+    <option>視察＋講演</option>
+
+    <option>相談したい</option>
+
+  </select>
+</div>
+
+<!-- 視察目的 -->
+<div class="form-group">
+  <label>視察目的・知りたい内容 *</label>
+
+  <textarea
+    name="purpose"
+    required
+    placeholder="視察の目的や知りたい内容をご記入ください"
+  ></textarea>
+</div>
+
+<!-- 送信ボタン -->
+<button
+  type="submit"
+  class="form-submit"
+>
+  視察を申し込む
+</button>
+```
+
+  </form>
+
+</section>
